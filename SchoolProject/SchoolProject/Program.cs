@@ -13,7 +13,7 @@ namespace SchoolProject
             List<Parallel> parallels = new List<Parallel>();
             List<Teacher> teachers = new List<Teacher>();
             List<Student> students = new List<Student>();
-            Student Andrei = new Student(9, "Andrei", "Borovik", 20);
+            Student Andrei = new Student(9, "Andrei", "Borovik", 24);
             Student Sasha = new Student(10, "Sasha", "Kot", 22);
             Student Masha = new Student(8, "Masha", "Ivanova", 18);
             Teacher Alexey = new Teacher("Alexey", "Astapchik", 24, ".NET");
@@ -25,16 +25,20 @@ namespace SchoolProject
             parallels.Add(class1);
             School school = new School(parallels, 2, "Средняя школа");
             Show(students);
-            var objects = from s in students
+            var objects = from s in students                        //выборка
                           where s.Name.ToUpper().StartsWith("A")
                           select s;
-            var obj = students.Where(s => s.Name.ToUpper().StartsWith("M"));
+            var obj = students.Where(s => s.Name.ToUpper().StartsWith("M")); //выборка
             Show1(objects);
             Show1(obj);
-            objects = students.OrderBy(s => s.Mark);
+            objects = students.OrderBy(s => s.Mark);            //сортировка по возрастанию
             Show1(objects);
-            objects = students.OrderByDescending(s => s.Mark);
+            objects = students.OrderByDescending(s => s.Mark);  //сортировка по убыванию
             Show1(objects);
+            var set = from st in students
+                      join t in teachers on st.Age equals t.Age
+                      select new { Name = st.Name, Age = t.Age, Subject = t.Subject };
+            Show1(set);
         }
         public static void Show<T>(List<T> i)
         {
