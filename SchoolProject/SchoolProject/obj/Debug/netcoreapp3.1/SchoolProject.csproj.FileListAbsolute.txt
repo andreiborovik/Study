@@ -1,0 +1,13 @@
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.exe
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.deps.json
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.runtimeconfig.json
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.runtimeconfig.dev.json
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.dll
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\bin\Debug\netcoreapp3.1\SchoolProject.pdb
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.csprojAssemblyReference.cache
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.AssemblyInfoInputs.cache
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.AssemblyInfo.cs
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.csproj.CoreCompileInputs.cache
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.dll
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.pdb
+D:\Андреева\Oxagile\SchoolProject\SchoolProject\obj\Debug\netcoreapp3.1\SchoolProject.genruntimeconfig.cache
