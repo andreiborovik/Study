@@ -24,5 +24,11 @@ namespace SchoolProject
             get => letter;
             set => letter = value;
         }
+
+        public List<Student> Students
+        {
+            get => students;
+            set => students = value;
+        }
     }
 }
