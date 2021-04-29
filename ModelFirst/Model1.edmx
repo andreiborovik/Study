@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Users" EntityType="Model1.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="Model1.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="Model1.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comments" EntityType="Model1.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="Model1.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="Model1.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsersRoles" EntityType="Model1.Store.UsersRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductsOrders" EntityType="Model1.Store.ProductsOrders" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UsersRoles_Users" Association="Model1.Store.FK_UsersRoles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersRoles" EntitySet="UsersRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersRoles_Roles" Association="Model1.Store.FK_UsersRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsersRoles" EntitySet="UsersRoles" />
+    </AssociationSet>
+    <AssociationSet Name="OrdersUsers" Association="Model1.Store.OrdersUsers">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOrders_Products" Association="Model1.Store.FK_ProductsOrders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsOrders" EntitySet="ProductsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOrders_Orders" Association="Model1.Store.FK_ProductsOrders_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProductsOrders" EntitySet="ProductsOrders" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsComments" Association="Model1.Store.ProductsComments">
+      <End Role="Comments" EntitySet="Comments" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ProductsCategories" Association="Model1.Store.ProductsCategories">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Lastname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Phone" Type="decimal" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Birthday" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Products_ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Users_UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Categories_CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsersRoles">
+    <Key>
+      <PropertyRef Name="Users_UserId" />
+      <PropertyRef Name="Roles_RoleId" />
+    </Key>
+    <Property Name="Users_UserId" Type="int" Nullable="false" />
+    <Property Name="Roles_RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductsOrders">
+    <Key>
+      <PropertyRef Name="Products_ProductId" />
+      <PropertyRef Name="Orders_OrderId" />
+    </Key>
+    <Property Name="Products_ProductId" Type="int" Nullable="false" />
+    <Property Name="Orders_OrderId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="OrdersUsers">
+    <End Role="Orders" Type="Model1.Store.Orders" Multiplicity="*" />
+    <End Role="Users" Type="Model1.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsComments">
+    <End Role="Comments" Type="Model1.Store.Comments" Multiplicity="*" />
+    <End Role="Products" Type="Model1.Store.Products" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="Products_ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductsCategories">
+    <End Role="Products" Type="Model1.Store.Products" Multiplicity="*" />
+    <End Role="Categories" Type="Model1.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Categories_CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersRoles_Users">
+    <End Role="Users" Type="Model1.Store.Users" Multiplicity="1" />
+    <End Role="UsersRoles" Type="Model1.Store.UsersRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersRoles">
+        <PropertyRef Name="Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersRoles_Roles">
+    <End Role="UsersRoles" Type="Model1.Store.UsersRoles" Multiplicity="*" />
+    <End Role="Roles" Type="Model1.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UsersRoles">
+        <PropertyRef Name="Roles_RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOrders_Products">
+    <End Role="Products" Type="Model1.Store.Products" Multiplicity="1" />
+    <End Role="ProductsOrders" Type="Model1.Store.ProductsOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductsOrders">
+        <PropertyRef Name="Products_ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOrders_Orders">
+    <End Role="ProductsOrders" Type="Model1.Store.ProductsOrders" Multiplicity="*" />
+    <End Role="Orders" Type="Model1.Store.Orders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="ProductsOrders">
+        <PropertyRef Name="Orders_OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Model1.Users" />
+          <EntitySet Name="Roles" EntityType="Model1.Roles" />
+          <AssociationSet Name="UsersRoles" Association="Model1.UsersRoles">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="Model1.Categories" />
+          <EntitySet Name="Comments" EntityType="Model1.Comments" />
+          <EntitySet Name="Orders" EntityType="Model1.Orders" />
+          <AssociationSet Name="OrdersUsers" Association="Model1.OrdersUsers">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="Model1.Products" />
+          <AssociationSet Name="ProductsOrders" Association="Model1.ProductsOrders">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="ProductsComments" Association="Model1.ProductsComments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="ProductsCategories" Association="Model1.ProductsCategories">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Phone" Type="Decimal" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="25" />
+          <NavigationProperty Name="Roles" Relationship="Model1.UsersRoles" FromRole="Users" ToRole="Roles" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Model1.OrdersUsers" FromRole="Users" ToRole="Orders" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="25" />
+          <NavigationProperty Name="Users" Relationship="Model1.UsersRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <Association Name="UsersRoles">
+          <End Type="Model1.Users" Role="Users" Multiplicity="*" />
+          <End Type="Model1.Roles" Role="Roles" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Products" Relationship="Model1.ProductsCategories" FromRole="Categories" ToRole="Products" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Model1.ProductsComments" FromRole="Comments" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Users" Relationship="Model1.OrdersUsers" FromRole="Orders" ToRole="Users" />
+          <NavigationProperty Name="Products" Relationship="Model1.ProductsOrders" FromRole="Orders" ToRole="Products" />
+        </EntityType>
+        <Association Name="OrdersUsers">
+          <End Type="Model1.Orders" Role="Orders" Multiplicity="*" />
+          <End Type="Model1.Users" Role="Users" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Model1.ProductsOrders" FromRole="Products" ToRole="Orders" />
+          <NavigationProperty Name="Comments" Relationship="Model1.ProductsComments" FromRole="Products" ToRole="Comments" />
+          <NavigationProperty Name="Categories" Relationship="Model1.ProductsCategories" FromRole="Products" ToRole="Categories" />
+        </EntityType>
+        <Association Name="ProductsOrders">
+          <End Type="Model1.Products" Role="Products" Multiplicity="*" />
+          <End Type="Model1.Orders" Role="Orders" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductsComments">
+          <End Type="Model1.Comments" Role="Comments" Multiplicity="*" />
+          <End Type="Model1.Products" Role="Products" Multiplicity="1" />
+        </Association>
+        <Association Name="ProductsCategories">
+          <End Type="Model1.Products" Role="Products" Multiplicity="*" />
+          <End Type="Model1.Categories" Role="Categories" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Users)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Roles)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Categories)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Comments)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Orders)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Products)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UsersRoles" TypeName="Model1.UsersRoles" StoreEntitySet="UsersRoles">
+      <EndProperty Name="Users">
+        <ScalarProperty Name="UserId" ColumnName="Users_UserId" />
+      </EndProperty>
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleId" ColumnName="Roles_RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OrdersUsers" TypeName="Model1.OrdersUsers" StoreEntitySet="Orders">
+      <EndProperty Name="Users">
+        <ScalarProperty Name="UserId" ColumnName="Users_UserId" />
+      </EndProperty>
+      <EndProperty Name="Orders">
+        <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsOrders" TypeName="Model1.ProductsOrders" StoreEntitySet="ProductsOrders">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="ProductId" ColumnName="Products_ProductId" />
+      </EndProperty>
+      <EndProperty Name="Orders">
+        <ScalarProperty Name="OrderId" ColumnName="Orders_OrderId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsComments" TypeName="Model1.ProductsComments" StoreEntitySet="Comments">
+      <EndProperty Name="Products">
+        <ScalarProperty Name="ProductId" ColumnName="Products_ProductId" />
+      </EndProperty>
+      <EndProperty Name="Comments">
+        <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductsCategories" TypeName="Model1.ProductsCategories" StoreEntitySet="Products">
+      <EndProperty Name="Categories">
+        <ScalarProperty Name="CategoryId" ColumnName="Categories_CategoryId" />
+      </EndProperty>
+      <EndProperty Name="Products">
+        <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
