@@ -16,9 +16,9 @@ namespace Tests
             List<string> paths = CreateFile(mainPath);
             WriteRandomData(paths[0]);
             List<object> list = new List<object>();
-            using (StreamReader sr = new StreamReader(mainPath + "text.txt", false))
+            using (StreamReader sr = new StreamReader(paths[0], false))
             {
-                FileInfo file = new FileInfo(mainPath + "text.txt");
+                FileInfo file = new FileInfo(paths[0]);
                 for (int i = 0; i <= file.Length; i += 104857600)
                 {
                     sr.Read(array, 0, array.Length);
